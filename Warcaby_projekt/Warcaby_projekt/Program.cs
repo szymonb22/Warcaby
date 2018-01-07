@@ -12,7 +12,7 @@ namespace Warcaby_projekt
         static void Wybor()
         {
             Console.WriteLine("Wcisnij N aby zaczac Gre 1 na 1\n" +
-                "Wcisnij M aby zagrac z komputerem"+"Wcisnij I aby zocaczyc instrukcja"+
+                "Wcisnij M aby zagrac z komputerem\n"+"Wcisnij I aby zocaczyc instrukcja\n"+
                   "Wcisnij W aby wyjsc  z gry\n"
                 );
             char wybór = Convert.ToChar(Console.ReadLine());
@@ -23,17 +23,25 @@ namespace Warcaby_projekt
                 case 'N':
                     NowaGra();
                     break;
+                case 'n':
+                    NowaGra();
+                    break;
                 case 'I':
                     Instrukcja();
                     break;
                 case 'M':
-                    NowaGra();
+                    //NowaGra();
                     break;
                 case 'i':
                     Instrukcja(); 
                     break;
+                case'w': Console.ReadKey();
+                    break;
+                case 'W':
+                    Console.ReadKey();
+                    break;
                 default:
-                    Console.WriteLine("Wcisnij N lub P");
+                    Console.WriteLine("Wcisnij N lub M lub I lub W ");
                     break;
             }
 
@@ -42,23 +50,25 @@ namespace Warcaby_projekt
         static void Instrukcja()
         {
             Console.Write("Poruszanie :" +
-                " Najpierw wybierz współrzedną pionową potem poziomą  oraz kierunek w która strone chcesz zrobic ruch l- lewo a p- prawo "
-                + "Pamietaj aby zatwierdzic wspołrzedne enterem np 2" +
-                "5" +
-                "l");
+                " Najpierw wybierz współrzedną pionową potem poziomą  oraz kierunek w która strone chcesz zrobic ruch l- lewo a p- prawo\n"
+                + "Pamietaj aby zatwierdzic wspołrzedne enterem np 2\n" +
+                "5\n" +
+                "l\n"+"wcisnij p aby powrócić do menu\n");
+            char u = Convert.ToChar(Console.ReadLine());
+            if (u == 'p') Wybor();
         }
 
         static void Main(string[] args)
         {
-            //Wybor();
-            NowaGra();
-            Console.ReadLine();
+            Wybor();
+
+            Console.Read();
         }
         static void NowaGra()
         {
             int i, j, m, n, k, w;
 
-            int g = 1;    // zmienna gracza
+            int g;    // zmienna gracza
             int pionkiO = 0;
             int pionkiX = 0;
 
@@ -66,17 +76,15 @@ namespace Warcaby_projekt
             char[,] plansza =
            {
            { ' ','O',' ','O',' ','O',' ','O'},
-           { 'O',' ','O',' ',' ',' ','O',' '},
+           { 'O',' ','O',' ','O',' ','O',' '},
            { ' ','O',' ','O',' ','O',' ','O'},
            { ' ',' ',' ',' ',' ',' ',' ',' '},
-           { ' ','O',' ',' ',' ',' ',' ',' '},
+           { ' ',' ',' ',' ',' ',' ',' ',' '},
            { 'X',' ','X',' ','X',' ','X',' '},
            { ' ','X',' ','X',' ','X',' ','X'},
            { 'X',' ','X',' ','X',' ','X',' '}
             };
 
-            Console.WriteLine("Jestes graczem numer " + g);
-            Console.WriteLine("Twoje pionki to X. Pionki gracza 2 to O");
             Console.WriteLine("  12345678 ");
             Console.WriteLine(" ==========");
             for (i = 0; i < 8; i++)
@@ -102,9 +110,13 @@ namespace Warcaby_projekt
             }
             Console.WriteLine(" ==========");
 
+            Console.WriteLine("wybór gracza:" +
+                "Pionki Gracza 1 to X , Pionki Graca 2 to O");
+            g = int.Parse(Console.ReadLine());
+
             while (true)
             {
-                          
+
                 while (g == 1)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -123,21 +135,14 @@ namespace Warcaby_projekt
                     Console.WriteLine("Ruch Gracza 1");
                     g += 1;
                     Console.WriteLine("Wprowadz wspołrzedne np 1 2 i kieunek l-lewo p - prawo ,piewsza wspórzedna pionowa druga pozioma");
+                    try { 
+                    n = int.Parse(Console.ReadLine());//kolumna
+                    m = int.Parse(Console.ReadLine()); //wiersz
 
 
-
-                    
-                    
-                        n = int.Parse(Console.ReadLine());//kolumna
-                        m = int.Parse(Console.ReadLine()); //wiersz
-
-
-                        n = n - 1;
-                        m = m - 1;
+                    n = n - 1;
+                    m = m - 1;
                     ruch = Convert.ToChar(Console.ReadLine());
-
-
-
 
                     switch (ruch)
                     {
@@ -156,15 +161,16 @@ namespace Warcaby_projekt
 
 
 
-                                    if (n - 2 >=0 && m - 2 >=0)
+                                    if (n - 2 >= 0 && m - 2 >= 0)
                                     {
-                                        if (plansza[m -2, n - 2] == ' ' && plansza[m - 1, n - 1] == 'O' || plansza[m - 1, n - 1] == 'D')
+                                        if (plansza[m - 2, n - 2] == ' ' && plansza[m - 1, n - 1] == 'O' || plansza[m - 1, n - 1] == 'D')
                                         {
 
                                             // bicie w lewo
                                             plansza[m - 1, n - 1] = ' ';
                                             plansza[m - 2, n - 2] = 'X';
                                             pionkiO--;
+
                                         }
                                         else
                                         {
@@ -197,7 +203,7 @@ namespace Warcaby_projekt
                                 else
                                 {
                                     plansza[m, n] = ' ';
-                                    if (n - 2 >= 0&& n-1>=0)
+                                    if (n - 2 >= 0 && n - 1 >= 0)
                                     {
                                         if (plansza[m + 2, n - 2] == ' ' && plansza[m + 1, n - 1] == 'O' || plansza[m + 1, n - 1] == 'D')
                                         {     // bicie w lewo przez damke K
@@ -287,7 +293,7 @@ namespace Warcaby_projekt
 
                                     if (n + 2 < 8 && n + 2 >= 0 && m - 2 >= 0)
                                     {
-                                        if (plansza[m - 2, n + 2] == ' ' && plansza[m - 1, n + 1] == 'O'|| plansza[m - 1, n + 1] == 'D')
+                                        if (plansza[m - 2, n + 2] == ' ' && plansza[m - 1, n + 1] == 'O' || plansza[m - 1, n + 1] == 'D')
                                         {
                                             plansza[m - 1, n + 1] = ' ';              //bicie   w prawo
                                             plansza[m - 2, n + 2] = 'X';
@@ -358,7 +364,7 @@ namespace Warcaby_projekt
                                     }
                                 }
                             }
-                            
+
                             else
                             {
                                 g = g - 1;
@@ -396,14 +402,16 @@ namespace Warcaby_projekt
 
                             }
                             Console.WriteLine(" ==========");
-                            
+
                             break;
                         default:
                             g = g - 1;
                             Console.WriteLine("Wpisz poprawne polecenie");
                             break;
-                    }
 
+                    }
+                }catch
+                    { Console.WriteLine("zły ruch"); g = 1; }
                 }
                 if (pionkiO == 0)
                 {
@@ -411,7 +419,7 @@ namespace Warcaby_projekt
 
                     Wybor();
                 }
-                g = 1;
+
                 while (g == 2)
                 {
 
@@ -419,32 +427,46 @@ namespace Warcaby_projekt
                     Console.WriteLine("Ruch gracza 2");
                     g = g - 1;
                     Console.WriteLine("Wprowadz wspołrzedne np 1 2 i kieunek l-lewo p - prawo ,piewsza wspórzedna pionowa druga pozioma");
-                    n = int.Parse(Console.ReadLine());
-                    n = n - 1;
-                    m = int.Parse(Console.ReadLine());
-                    m = m - 1;
-                    ruch = Convert.ToChar(Console.ReadLine());
+                    try {
+                        n = int.Parse(Console.ReadLine());
+                        n = n - 1;
+                        m = int.Parse(Console.ReadLine());
+                        m = m - 1;
+                        ruch = Convert.ToChar(Console.ReadLine());
 
-                    switch (ruch)
-                    {
-                        case 'l':
-                            if (n > -1 && m > -1 && n < 8 && m < 8)                             {
-                                if (plansza[m, n] != 'O' && plansza[m, n] != 'D')
-                                {
-                                    g = g + 1;
-                                    Console.WriteLine("Nie twoj pionek!");
-                                    break;
-                                }
-                                if (plansza[m, n] != 'D')
-                                {
-                                    plansza[m, n] = ' ';
-                                    if (m + 2 < 8 && n - 2 >= 0 && m + 1 < 8 && n - 1 >= 0)
+                        switch (ruch)
+                        {
+                            case 'l':
+                                if (n > -1 && m > -1 && n < 8 && m < 8) {
+                                    if (plansza[m, n] != 'O' && plansza[m, n] != 'D')
                                     {
-                                        if (plansza[m + 2, n - 2] == ' ' && plansza[m + 1, n - 1] == 'X' || plansza[m + 1, n - 1] == 'K')
+                                        g = g + 1;
+                                        Console.WriteLine("Nie twoj pionek!");
+                                        break;
+                                    }
+                                    if (plansza[m, n] != 'D')
+                                    {
+                                        plansza[m, n] = ' ';
+                                        if (m + 2 < 8 && n - 2 >= 0 && m + 1 < 8 && n - 1 >= 0)
                                         {
-                                            plansza[m + 1, n - 1] = ' ';             //bicie  w lewo
-                                            plansza[m + 2, n - 2] = 'O';
-                                            pionkiX--;
+                                            if (plansza[m + 2, n - 2] == ' ' && plansza[m + 1, n - 1] == 'X' || plansza[m + 1, n - 1] == 'K')
+                                            {
+                                                plansza[m + 1, n - 1] = ' ';             //bicie  w lewo
+                                                plansza[m + 2, n - 2] = 'O';
+                                                pionkiX--;
+                                            }
+                                            else
+                                            {
+                                                if (plansza[++m, --n] != ' ')
+                                                {
+                                                    g = g + 1;
+                                                    Console.WriteLine("Pole zajete");
+                                                    plansza[--m, ++n] = 'O'; //sprawdzenie czy pole jest wolne
+                                                    break;
+                                                }
+                                                else
+                                                    plansza[m, n] = 'O';
+                                            }
                                         }
                                         else
                                         {
@@ -461,27 +483,27 @@ namespace Warcaby_projekt
                                     }
                                     else
                                     {
-                                        if (plansza[++m, --n] != ' ')
+                                        plansza[m, n] = ' ';
+                                        if (n - 2 > 0)
                                         {
-                                            g = g + 1;
-                                            Console.WriteLine("Pole zajete");
-                                            plansza[--m, ++n] = 'O'; //sprawdzenie czy pole jest wolne
-                                            break;
-                                        }
-                                        else
-                                            plansza[m, n] = 'O';
-                                    }
-                                }
-                                else
-                                {
-                                    plansza[m, n] = ' ';
-                                    if (n - 2 > 0)
-                                    {
-                                        if (plansza[m - 2, n - 2] == ' ' && plansza[m - 1, n - 1] == 'X' || plansza[m - 1, n - 1] == 'K') 
-                                        {
-                                            plansza[m - 1, n - 1] = ' ';             //bicie prez damke w lewo
-                                            plansza[m - 2, n - 2] = 'D';
-                                            pionkiX--;
+                                            if (plansza[m - 2, n - 2] == ' ' && plansza[m - 1, n - 1] == 'X' || plansza[m - 1, n - 1] == 'K')
+                                            {
+                                                plansza[m - 1, n - 1] = ' ';             //bicie prez damke w lewo
+                                                plansza[m - 2, n - 2] = 'D';
+                                                pionkiX--;
+                                            }
+                                            else
+                                            {
+                                                if (plansza[--m, --n] != ' ')
+                                                {
+                                                    g = g + 1;
+                                                    Console.WriteLine("Pole zajete");
+                                                    plansza[--m, ++n] = 'D'; // sprawdzenie czy pole jest wolne
+                                                    break;
+                                                }
+                                                else
+                                                    plansza[m, n] = 'D';
+                                            }
                                         }
                                         else
                                         {
@@ -494,83 +516,82 @@ namespace Warcaby_projekt
                                             }
                                             else
                                                 plansza[m, n] = 'D';
+
                                         }
-                                    }
-                                    else
-                                    {
-                                        if (plansza[--m, --n] != ' ')
-                                        {
-                                            g = g + 1;
-                                            Console.WriteLine("Pole zajete");
-                                            plansza[--m, ++n] = 'D'; // sprawdzenie czy pole jest wolne
-                                            break;
-                                        }
-                                        else
-                                            plansza[m, n] = 'D';
 
                                     }
-
                                 }
-                            }
-                            else
-                            {
-                                g = g + 1;
-                                Console.WriteLine("Zly ruch");
-                            }
-                            k = 7; w = 0;
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            if (plansza[k, w] == 'O')
-                                plansza[k, w] = 'D';
-                            if (plansza[k, w | +2] == 'O')                                     // zamiana pionka O na damke D
-                                plansza[k, w + 2] = 'D';
-                            if (plansza[k, w + 4] == 'O')
-                                plansza[k, w + 4] = 'D';
-                            if (plansza[k, w + 6] == 'O')
-                                plansza[k, w + 6] = 'D';
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine("  12345678 ");
-                            Console.WriteLine(" ==========");
-                            for (i = 0; i < 8; i++)
-                            {
-                                Console.Write("{0}|", i + 1);
-                                for (j = 0; j < 8; j++)
-                                {
-                                    if (plansza[i, j] == 'X')
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.Red;
-                                    }
-                                    if (plansza[i, j] == 'O')
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.Green;
-                                    }
-                                    Console.Write(plansza[i, j]);
-                                }
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.WriteLine("|");
-
-                            }
-                            Console.WriteLine(" ==========");
-
-                            break;
-                        case 'p':
-                            if (n > -1 && m > -1 && n < 7 && m < 8)
-                            {
-                                if (plansza[m, n] != 'O' && plansza[m, n] != 'D')
+                                else
                                 {
                                     g = g + 1;
-                                    Console.WriteLine("Nie twoj pionek!");
-                                    break;
+                                    Console.WriteLine("Zly ruch");
                                 }
-                                if (plansza[m, n] != 'D')
+                                k = 7; w = 0;
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                if (plansza[k, w] == 'O')
+                                    plansza[k, w] = 'D';
+                                if (plansza[k, w | +2] == 'O')                                     // zamiana pionka O na damke D
+                                    plansza[k, w + 2] = 'D';
+                                if (plansza[k, w + 4] == 'O')
+                                    plansza[k, w + 4] = 'D';
+                                if (plansza[k, w + 6] == 'O')
+                                    plansza[k, w + 6] = 'D';
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("  12345678 ");
+                                Console.WriteLine(" ==========");
+                                for (i = 0; i < 8; i++)
                                 {
-                                    plansza[m, n] = ' ';
-                                    if (n + 2 < 8)
+                                    Console.Write("{0}|", i + 1);
+                                    for (j = 0; j < 8; j++)
                                     {
-                                        if (plansza[m + 2, n + 2] == ' ' && plansza[m + 1, n + 1] == 'X'|| plansza[m + 1, n + 1] == 'K')
+                                        if (plansza[i, j] == 'X')
                                         {
-                                            plansza[m + 1, n + 1] = ' ';                 //bicie w prawo
-                                            plansza[m + 2, n + 2] = 'O';
-                                            pionkiX--;
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                        }
+                                        if (plansza[i, j] == 'O')
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                        }
+                                        Console.Write(plansza[i, j]);
+                                    }
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.WriteLine("|");
+
+                                }
+                                Console.WriteLine(" ==========");
+
+                                break;
+                            case 'p':
+                                if (n > -1 && m > -1 && n < 7 && m < 8)
+                                {
+                                    if (plansza[m, n] != 'O' && plansza[m, n] != 'D')
+                                    {
+                                        g = g + 1;
+                                        Console.WriteLine("Nie twoj pionek!");
+                                        break;
+                                    }
+                                    if (plansza[m, n] != 'D')
+                                    {
+                                        plansza[m, n] = ' ';
+                                        if (n + 2 < 8)
+                                        {
+                                            if (plansza[m + 2, n + 2] == ' ' && plansza[m + 1, n + 1] == 'X' || plansza[m + 1, n + 1] == 'K')
+                                            {
+                                                plansza[m + 1, n + 1] = ' ';                 //bicie w prawo
+                                                plansza[m + 2, n + 2] = 'O';
+                                                pionkiX--;
+                                            }
+                                            else
+                                            {
+                                                if (plansza[++m, ++n] != ' ')
+                                                {
+                                                    g = g + 1;
+                                                    Console.WriteLine("Pole zajete");
+                                                    plansza[--m, --n] = 'O';
+                                                    break;
+                                                }
+                                                else plansza[m, n] = 'O';
+                                            }
                                         }
                                         else
                                         {
@@ -583,96 +604,89 @@ namespace Warcaby_projekt
                                             }
                                             else plansza[m, n] = 'O';
                                         }
+
                                     }
                                     else
                                     {
-                                        if (plansza[++m, ++n] != ' ')
+                                        plansza[m, n] = ' ';
+                                        if (plansza[m, n + 1] == ' ' && plansza[m - 1, n + 1] == 'X' || plansza[m - 1, n + 1] == 'K')
                                         {
-                                            g = g + 1;
-                                            Console.WriteLine("Pole zajete");
-                                            plansza[--m, --n] = 'O';
-                                            break;
+                                            plansza[m - 1, n + 1] = ' ';                 //bicie przez damke w prawo
+                                            plansza[m - 2, n + 2] = 'D';
+                                            pionkiX--;
                                         }
-                                        else plansza[m, n] = 'O';
+                                        else
+                                        {
+                                            if (plansza[m, ++n] != ' ')
+                                            {
+                                                g = g + 1;
+                                                Console.WriteLine("Pole zajete");
+                                                plansza[--m, --n] = 'O';
+                                                break;
+                                            }
+                                            else plansza[--m, n] = 'D';
+                                        }
                                     }
-
                                 }
                                 else
                                 {
-                                    plansza[m, n] = ' ';
-                                    if (plansza[m, n + 1] == ' ' && plansza[m - 1, n + 1] == 'X'|| plansza[m - 1, n + 1] == 'K') 
-                                    {
-                                        plansza[m - 1, n + 1] = ' ';                 //bicie przez damke w prawo
-                                        plansza[m - 2, n + 2] = 'D';
-                                        pionkiX--;
-                                    }
-                                    else
-                                    {
-                                        if (plansza[m, ++n] != ' ')
-                                        {
-                                            g = g + 1;
-                                            Console.WriteLine("Pole zajete");
-                                            plansza[--m, --n] = 'O';
-                                            break;
-                                        }
-                                        else plansza[--m, n] = 'D';
-                                    }
+                                    g = g + 1;
+                                    Console.WriteLine("Zly ruch");
                                 }
-                            }
-                            else
-                            {
-                                g = g + 1;
-                                Console.WriteLine("Zly ruch");
-                            }
-                            k = 7; w = 0;
+                                k = 7; w = 0;
 
-                            if (plansza[k, w] == 'O')
-                                plansza[k, w] = 'D';
-                            if (plansza[k, w | +2] == 'O')                                     // zamiana pionka O na damke D
-                                plansza[k, w + 2] = 'D';
-                            if (plansza[k, w + 4] == 'O')
-                                plansza[k, w + 4] = 'D';
-                            if (plansza[k, w + 6] == 'O')
-                                plansza[k, w + 6] = 'D';
-                            Console.WriteLine("  12345678 ");
-                            Console.WriteLine(" ==========");
-                            for (i = 0; i < 8; i++)
-                            {
-                                Console.Write("{0}|", i + 1);
-                                for (j = 0; j < 8; j++)
+                                if (plansza[k, w] == 'O')
+                                    plansza[k, w] = 'D';
+                                if (plansza[k, w | +2] == 'O')                                     // zamiana pionka O na damke D
+                                    plansza[k, w + 2] = 'D';
+                                if (plansza[k, w + 4] == 'O')
+                                    plansza[k, w + 4] = 'D';
+                                if (plansza[k, w + 6] == 'O')
+                                    plansza[k, w + 6] = 'D';
+                                Console.WriteLine("  12345678 ");
+                                Console.WriteLine(" ==========");
+                                for (i = 0; i < 8; i++)
                                 {
-                                    if (plansza[i, j] == 'X')
+                                    Console.Write("{0}|", i + 1);
+                                    for (j = 0; j < 8; j++)
                                     {
-                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        if (plansza[i, j] == 'X')
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                        }
+                                        if (plansza[i, j] == 'O')
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                        }
+                                        Console.Write(plansza[i, j]);
                                     }
-                                    if (plansza[i, j] == 'O')
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.Green;
-                                    }
-                                    Console.Write(plansza[i, j]);
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.WriteLine("|");
+
                                 }
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.WriteLine("|");
+                                Console.WriteLine(" ==========");
 
-                            }
-                            Console.WriteLine(" ==========");
-
-                            break;
-                        default:
-                            g = g + 1;
-                            Console.WriteLine("Wpisz poprawne polecenie");
-                            break;
+                                break;
+                            default:
+                                g = g + 1;
+                                Console.WriteLine("Wpisz poprawne polecenie");
+                                break;
+                        }
                     }
+
+                    catch
+                    {
+                        Console.WriteLine("Zły ruch");
+                    g = 2;
+                    }
+                    if (pionkiX == 0)
+                    {
+                        Console.WriteLine("Wygrywa Gracz 2");
+                        Wybor();
+                    }
+
+
                 }
-
-                if (pionkiX == 0)
-                {
-                    Console.WriteLine("Wygrywa Gracz 2");
-                    Wybor();
-                }
-
-
-
             }
 
         }
