@@ -4,3 +4,10 @@ C:\Users\Szymon\Desktop\Warcaby proby\Warcaby_projekt\Warcaby_projekt\bin\Debug\
 C:\Users\Szymon\Desktop\Warcaby proby\Warcaby_projekt\Warcaby_projekt\obj\Debug\Warcaby_projekt.csproj.CoreCompileInputs.cache
 C:\Users\Szymon\Desktop\Warcaby proby\Warcaby_projekt\Warcaby_projekt\obj\Debug\Warcaby_projekt.exe
 C:\Users\Szymon\Desktop\Warcaby proby\Warcaby_projekt\Warcaby_projekt\obj\Debug\Warcaby_projekt.pdb
+C:\Users\Szymon\Desktop\Warcaby\PO\Warcaby_projekt\Warcaby_projekt\bin\Debug\Warcaby_projekt.exe.config
+C:\Users\Szymon\Desktop\Warcaby\PO\Warcaby_projekt\Warcaby_projekt\bin\Debug\Warcaby_projekt.exe
+C:\Users\Szymon\Desktop\Warcaby\PO\Warcaby_projekt\Warcaby_projekt\bin\Debug\Warcaby_projekt.pdb
+C:\Users\Szymon\Desktop\Warcaby\PO\Warcaby_projekt\Warcaby_projekt\obj\Debug\Warcaby_projekt.csprojResolveAssemblyReference.cache
+C:\Users\Szymon\Desktop\Warcaby\PO\Warcaby_projekt\Warcaby_projekt\obj\Debug\Warcaby_projekt.csproj.CoreCompileInputs.cache
+C:\Users\Szymon\Desktop\Warcaby\PO\Warcaby_projekt\Warcaby_projekt\obj\Debug\Warcaby_projekt.exe
+C:\Users\Szymon\Desktop\Warcaby\PO\Warcaby_projekt\Warcaby_projekt\obj\Debug\Warcaby_projekt.pdb
